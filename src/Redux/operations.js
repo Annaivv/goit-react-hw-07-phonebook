@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, nanoid } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://6429c64d00dfa3b54739fc50.mockapi.io/';
 
@@ -20,6 +20,20 @@ export const deleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const response = await axios.delete(`/contacts/${contactId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+// const id = nanoid();
+
+export const addContact = createAsyncThunk(
+  'tasks/addContact',
+  async ({ name, phone }, thunkAPI) => {
+    try {
+      const response = await axios.post('/contacts', { name, phone });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
