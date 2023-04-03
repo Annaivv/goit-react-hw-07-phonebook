@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'Redux/operations';
-import { getContacts } from 'Redux/selectors';
+import { getError, getIsLoading } from 'Redux/selectors';
 import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './GlobalStyle';
 import { ContactForm } from './ContactForm/ContactForm';
@@ -10,7 +10,8 @@ import { ContactList } from './ContactList/ContactList';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { isLoading, error } = useSelector(getContacts);
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -26,10 +27,5 @@ export const App = () => {
       <ContactList />
       <GlobalStyle />
     </Layout>
-    // <div>
-    //   {isLoading && <p>Loading tasks...</p>}
-    //   {error && <p>{error}</p>}
-    //   <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
-    // </div>
   );
 };
