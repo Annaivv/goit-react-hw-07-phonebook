@@ -7,7 +7,7 @@ export const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const handleFilterChange = query => dispatch(setFilter(query));
+  const handleFilterChange = query => dispatch(setFilter(query.toLowerCase()));
 
   return (
     <FilterBox>
