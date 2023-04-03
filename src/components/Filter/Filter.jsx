@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FilterBox, FilterInput, FilterLabel } from './Filter.styled';
-import { getFilter } from 'Redux/selectors';
+import { selectFilter } from 'Redux/selectors';
 import { setFilter } from 'Redux/filterSlice';
 
 export const Filter = () => {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleFilterChange = query => dispatch(setFilter(query.toLowerCase()));

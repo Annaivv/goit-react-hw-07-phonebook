@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Field, Form, Input } from './ContactForm.styled';
 import { Button } from 'components/Button/Button';
 import { addContact } from 'Redux/operations';
-import { getContacts } from 'Redux/selectors';
+import { selectContacts } from 'Redux/selectors';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const storedContacts = useSelector(getContacts);
+  const storedContacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = evt => {
