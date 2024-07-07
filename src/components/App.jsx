@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Alert } from '@mui/material';
 import { fetchContacts } from 'Redux/operations';
 import { selectError, selectIsLoading } from 'Redux/selectors';
-import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './GlobalStyle';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
+import { ContactForm } from './ContactForm';
+import { Title } from './Title';
+import { ContactsSection } from './ContactsSection';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -18,14 +18,23 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Layout>
-      <h1>Phonebook</h1>
+    <Container sx={{ marginTop: 8 }}>
+      <Title component="h2" variant="h2">
+        Phonebook
+      </Title>
       <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList />
+      <ContactsSection />
+      {isLoading && !error && (
+        <Alert
+          severity="info"
+          variant="filled"
+          sx={{ maxWidth: '400px', margin: '0 auto' }}
+        >
+          Request in progress...
+        </Alert>
+      )}
+
       <GlobalStyle />
-    </Layout>
+    </Container>
   );
 };
