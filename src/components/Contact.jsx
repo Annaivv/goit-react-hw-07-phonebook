@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { ContactBlock } from './Contact.styled';
 import { ButtonTemplate } from 'components/Button';
 import { deleteContact } from 'Redux/operations';
+import { Box, ListItemText } from '@mui/material';
 
 export const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -9,13 +9,20 @@ export const Contact = ({ contact }) => {
   const handleDelete = () => dispatch(deleteContact(contact.id));
 
   return (
-    <ContactBlock>
-      <p>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <ListItemText sx={{ margin: 'auto 0' }}>
         <span>{contact.name}</span>
         <span>: </span>
         <span>{contact.phone.toString()}</span>
-      </p>
+      </ListItemText>
       <ButtonTemplate onClick={handleDelete}>Delete</ButtonTemplate>
-    </ContactBlock>
+    </Box>
   );
 };

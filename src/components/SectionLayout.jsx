@@ -15,9 +15,7 @@ export const SectionLayout = ({ text, children }) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box sx={{ marginTop: 4 }}>
-          <Title component="h4" variant="h4">
-            {text}
-          </Title>
+          <Title>{text}</Title>
           {children}
         </Box>
       </Container>

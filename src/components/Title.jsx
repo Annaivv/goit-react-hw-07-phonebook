@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 
-export const Title = ({ component, variant, children }) => {
+export const Title = ({ component = 'h4', variant = 'h4', children }) => {
   return (
     <Typography
       component={component}

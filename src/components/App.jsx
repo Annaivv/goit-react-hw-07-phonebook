@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import { fetchContacts } from 'Redux/operations';
 import { selectError, selectIsLoading } from 'Redux/selectors';
 import { GlobalStyle } from './GlobalStyle';
 import { ContactForm } from './ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
 import { Title } from './Title';
+import { ContactsSection } from './ContactsSection';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,12 +23,9 @@ export const App = () => {
         Phonebook
       </Title>
       <ContactForm />
-      <Typography component="h4" variant="h4" sx={{ color: '#1976d2' }}>
-        Contacts
-      </Typography>
-      <Filter />
+      <ContactsSection />
       {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList />
+
       <GlobalStyle />
     </Container>
   );
