@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ContactBlock } from './Contact.styled';
-import { ButtonTemplate } from 'components/Button/Button';
+import { ButtonTemplate } from 'components/Button';
 import { deleteContact } from 'Redux/operations';
 
 export const Contact = ({ contact }) => {
