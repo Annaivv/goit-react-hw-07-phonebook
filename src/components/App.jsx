@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import { Container, Alert } from '@mui/material';
 import { fetchContacts } from 'Redux/operations';
 import { selectError, selectIsLoading } from 'Redux/selectors';
 import { GlobalStyle } from './GlobalStyle';
@@ -24,7 +24,15 @@ export const App = () => {
       </Title>
       <ContactForm />
       <ContactsSection />
-      {isLoading && !error && <b>Request in progress...</b>}
+      {isLoading && !error && (
+        <Alert
+          severity="info"
+          variant="filled"
+          sx={{ maxWidth: '400px', margin: '0 auto' }}
+        >
+          Request in progress...
+        </Alert>
+      )}
 
       <GlobalStyle />
     </Container>
