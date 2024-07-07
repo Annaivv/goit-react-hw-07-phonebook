@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ContactBlock } from './Contact.styled';
-import { Button } from 'components/Button/Button';
+import { ButtonTemplate } from 'components/Button/Button';
 import { deleteContact } from 'Redux/operations';
 
 export const Contact = ({ contact }) => {
@@ -15,7 +15,7 @@ export const Contact = ({ contact }) => {
         <span>: </span>
         <span>{contact.phone.toString()}</span>
       </p>
-      <Button onClick={handleDelete}>Delete</Button>
+      <ButtonTemplate onClick={handleDelete}>Delete</ButtonTemplate>
     </ContactBlock>
   );
 };

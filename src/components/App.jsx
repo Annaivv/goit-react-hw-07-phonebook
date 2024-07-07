@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Typography } from '@mui/material';
 import { fetchContacts } from 'Redux/operations';
 import { selectError, selectIsLoading } from 'Redux/selectors';
 import { Layout } from './Layout/Layout';
@@ -19,7 +20,9 @@ export const App = () => {
 
   return (
     <Layout>
-      <h1>Phonebook</h1>
+      <Typography component="h2" variant="h2" align="center">
+        Phonebook
+      </Typography>
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />

@@ -1,9 +1,19 @@
 import { StyledButton } from './Button.styled';
+import { Button } from '@mui/material';
 
-export const Button = ({ type = 'button', children, ...otherProps }) => {
+export const ButtonTemplate = ({
+  type = 'button',
+  children,
+  ...otherProps
+}) => {
   return (
-    <StyledButton type={type} {...otherProps}>
+    <Button
+      type={type}
+      variant="contained"
+      sx={{ mt: 3, mb: 2 }}
+      {...otherProps}
+    >
       {children}
-    </StyledButton>
+    </Button>
   );
 };
