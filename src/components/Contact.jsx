@@ -17,7 +17,7 @@ export const Contact = ({ contact }) => {
         justifyContent: 'space-between',
       }}
     >
-      <ListItemText sx={{ margin: 'auto 0' }}>
+      <ListItemText sx={{ margin: 'auto 0', color: '#767676' }}>
         <span>{contact.name}</span>
         <span>: </span>
         <span>{contact.phone.toString()}</span>
