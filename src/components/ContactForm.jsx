@@ -9,7 +9,10 @@ import { SectionLayout } from './SectionLayout';
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [error, setError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [nameHelperText, setNameHelperText] = useState('');
+  const [phoneHelperText, setPhoneHelperText] = useState('');
   const storedContacts = useSelector(selectContacts);
   const dispatch = useDispatch();
   const regexName =
@@ -33,29 +36,37 @@ export const ContactForm = () => {
   };
 
   const validateInput = (regex, input) => {
-    const validated = regex.test(input);
-    if (!validated) {
-      alert('Input not valid');
-      return;
-    } else {
-      console.log(validated);
-      return validated;
-    }
+    return regex.test(input);
   };
 
-  const handleNameChange = evt => {
-    const validatedName = validateInput(regexName, evt.target.value);
-    if (validatedName) {
-      setName(evt.target.value);
-    }
-  };
+  const handleInput =
+    (setter, regex, errorSetter, helperTextSetter, errorMessage) => evt => {
+      const value = evt.target.value;
+      if (value === '' || validateInput(regex, value)) {
+        setter(value);
+        errorSetter(false);
+        helperTextSetter('');
+      } else {
+        errorSetter(true);
+        helperTextSetter(errorMessage);
+      }
+    };
 
-  const handlePhoneChange = evt => {
-    const validatedTel = validateInput(regexTel, evt.target.value);
-    if (validatedTel) {
-      setPhone(evt.target.value);
-    }
-  };
+  const handleNameChange = handleInput(
+    setName,
+    regexName,
+    setNameError,
+    setNameHelperText,
+    'Name may contain only letters, apostrophe, dash and spaces'
+  );
+
+  const handlePhoneChange = handleInput(
+    setPhone,
+    regexTel,
+    setPhoneError,
+    setPhoneHelperText,
+    'Phone number must contain only digits and dashes'
+  );
 
   return (
     <SectionLayout text="Add new contact">
@@ -69,9 +80,10 @@ export const ContactForm = () => {
           id="name"
           label="Name"
           autoFocus
+          error={nameError}
           value={name}
           onChange={handleNameChange}
-          helperText="Name may contain only letters, apostrophe, dash and spaces"
+          helperText={nameHelperText}
         />
         <TextField
           margin="normal"
@@ -82,9 +94,10 @@ export const ContactForm = () => {
           id="phone"
           label="Phone number"
           autoFocus
+          error={phoneError}
           value={phone}
           onChange={handlePhoneChange}
-          helperText="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          helperText={phoneHelperText}
         />
         <ButtonTemplate type="submit" fullWidth>
           Add contact
@@ -93,6 +106,3 @@ export const ContactForm = () => {
     </SectionLayout>
   );
 };
-
-// regexName = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-// regexTel = '+?d{1,4}?[-.s]?(?d{1,3}?)?[-.s]?d{1,4}[-.s]?d{1,4}[-.s]?d{1,9}';
