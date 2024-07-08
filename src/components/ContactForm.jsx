@@ -99,7 +99,7 @@ export const ContactForm = () => {
           onChange={handlePhoneChange}
           helperText={phoneHelperText}
         />
-        <ButtonTemplate type="submit" fullWidth>
+        <ButtonTemplate type="submit" fullWidth variant="contained">
           Add contact
         </ButtonTemplate>
       </Box>

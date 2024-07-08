@@ -22,7 +22,9 @@ export const Contact = ({ contact }) => {
         <span>: </span>
         <span>{contact.phone.toString()}</span>
       </ListItemText>
-      <ButtonTemplate onClick={handleDelete}>Delete</ButtonTemplate>
+      <ButtonTemplate onClick={handleDelete} variant="outlined">
+        Delete
+      </ButtonTemplate>
     </Box>
   );
 };
