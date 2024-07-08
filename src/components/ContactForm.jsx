@@ -9,8 +9,12 @@ import { SectionLayout } from './SectionLayout';
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [error, setError] = useState(false);
   const storedContacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+  const regexName =
+    /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+  const regexTel = /^[\d-]+$/;
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -28,9 +32,34 @@ export const ContactForm = () => {
     setPhone('');
   };
 
+  const validateInput = (regex, input) => {
+    const validated = regex.test(input);
+    if (!validated) {
+      alert('Input not valid');
+      return;
+    } else {
+      console.log(validated);
+      return validated;
+    }
+  };
+
+  const handleNameChange = evt => {
+    const validatedName = validateInput(regexName, evt.target.value);
+    if (validatedName) {
+      setName(evt.target.value);
+    }
+  };
+
+  const handlePhoneChange = evt => {
+    const validatedTel = validateInput(regexTel, evt.target.value);
+    if (validatedTel) {
+      setPhone(evt.target.value);
+    }
+  };
+
   return (
     <SectionLayout text="Add new contact">
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
         <TextField
           margin="normal"
           required
@@ -41,7 +70,7 @@ export const ContactForm = () => {
           label="Name"
           autoFocus
           value={name}
-          onChange={evt => setName(evt.target.value)}
+          onChange={handleNameChange}
           helperText="Name may contain only letters, apostrophe, dash and spaces"
         />
         <TextField
@@ -54,7 +83,7 @@ export const ContactForm = () => {
           label="Phone number"
           autoFocus
           value={phone}
-          onChange={evt => setPhone(evt.target.value)}
+          onChange={handlePhoneChange}
           helperText="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         />
         <ButtonTemplate type="submit" fullWidth>
